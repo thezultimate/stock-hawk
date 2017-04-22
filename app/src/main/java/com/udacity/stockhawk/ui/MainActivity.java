@@ -1,6 +1,7 @@
 package com.udacity.stockhawk.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -28,9 +29,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
+import static com.udacity.stockhawk.sync.QuoteSyncJob.ACTION_DATA_UPDATED;
+
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>,
         SwipeRefreshLayout.OnRefreshListener,
         StockAdapter.StockAdapterOnClickHandler {
+
+    public static final String CHART_SYMBOL_KEY = "info.dafferianto.key.CHART_SYMBOL";
 
     private static final int STOCK_LOADER = 0;
     @SuppressWarnings("WeakerAccess")
@@ -47,6 +52,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onClick(String symbol) {
         Timber.d("Symbol clicked: %s", symbol);
+        Context context = this;
+        Class destinationClass = ChartActivity.class;
+        Intent intentToStartChartActivity = new Intent(context, destinationClass);
+        intentToStartChartActivity.putExtra(MainActivity.CHART_SYMBOL_KEY, symbol);
+        startActivity(intentToStartChartActivity);
     }
 
     @Override
@@ -77,7 +87,16 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 String symbol = adapter.getSymbolAtPosition(viewHolder.getAdapterPosition());
                 PrefUtils.removeStock(MainActivity.this, symbol);
-                getContentResolver().delete(Contract.Quote.makeUriForStock(symbol), null, null);
+                int deletedRows = getContentResolver().delete(Contract.Quote.makeUriForStock(symbol), null, null);
+                if (adapter.getItemCount() - deletedRows == 0) {
+                    swipeRefreshLayout.setRefreshing(false);
+                    error.setText(getString(R.string.error_no_stocks));
+                    error.setVisibility(View.VISIBLE);
+                }
+                if (deletedRows > 0) {
+                    Intent dataUpdatedIntent = new Intent(ACTION_DATA_UPDATED);
+                    getApplicationContext().sendBroadcast(dataUpdatedIntent);
+                }
             }
         }).attachToRecyclerView(stockRecyclerView);
 
@@ -161,8 +180,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         if (PrefUtils.getDisplayMode(this)
                 .equals(getString(R.string.pref_display_mode_absolute_key))) {
             item.setIcon(R.drawable.ic_percentage);
+            item.setTitle(R.string.price_change_to_percentage);
         } else {
             item.setIcon(R.drawable.ic_dollar);
+            item.setTitle(R.string.price_change_to_absolute);
         }
     }
 

@@ -1,24 +1,24 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Stock Hawk</string>
 
     <string name="pref_stocks_initialized_key" translatable="false">initialized</string>
 
-    <string name="pref_stocks_key">stocks</string>
+    <string name="pref_stocks_key" translatable="false">stocks</string>
 
 
-    <string name="pref_display_mode_key">displayMode</string>
-    <string name="pref_display_mode_default">@string/pref_display_mode_percentage_key</string>
+    <string name="pref_display_mode_key" translatable="false">displayMode</string>
+    <string name="pref_display_mode_default" translatable="false">@string/pref_display_mode_percentage_key</string>
 
-    <string name="pref_display_mode_absolute_key">absolute</string>
-    <string name="pref_display_mode_percentage_key">percentage</string>
+    <string name="pref_display_mode_absolute_key" translatable="false">absolute</string>
+    <string name="pref_display_mode_percentage_key" translatable="false">percentage</string>
 
-    <string name="default_stocks_yahoo">YHOO</string>
-    <string name="default_stocks_apple">AAPL</string>
-    <string name="default_stocks_microsoft">MSFT</string>
-    <string name="default_stocks_facebook">FB</string>
+    <string name="default_stocks_yahoo" translatable="false">YHOO</string>
+    <string name="default_stocks_apple" translatable="false">AAPL</string>
+    <string name="default_stocks_microsoft" translatable="false">MSFT</string>
+    <string name="default_stocks_facebook" translatable="false">FB</string>
 
 
-    <string name="action_change_units">@string/pref_display_mode_key</string>
+    <string name="action_change_units" translatable="false">@string/pref_display_mode_key</string>
 
 
     <string name="dialog_title">Add Stock</string>
@@ -31,5 +31,25 @@
 
     <string name="toast_stock_added_no_connectivity">Symbol %s added. Will refresh when network available.</string>
     <string name="toast_no_connectivity">Will refresh when network available.</string>
+
+    <string name="toast_stock_invalid_symbol">Symbol %s is invalid.</string>
+    <string name="toast_stock_no_history">Symbol %s has no history.</string>
+    <string name="toast_stock_one_of_symbol_invalid">One of the symbols is invalid, but cannot be determined which one. Resetting list.</string>
+
+    <string name="chart_title">Stock Chart</string>
+
+    <string name="title_widget_collection">Stock Hawk Widget</string>
+
+    <string name="empty_stock_list">No Stock Information Available</string>
+
+    <string name="price_change_to_percentage">Switch to percentage price change</string>
+    <string name="price_change_to_absolute">Switch to absolute price change</string>
+
+    <string name="chart_content_description">Price chart of stock %s.</string>
+
+    <string name="a11y_symbol">Stock symbol: <xliff:g id="symbol">%1$s</xliff:g></string>
+    <string name="a11y_price">Price: <xliff:g id="price">%1$s</xliff:g></string>
+    <string name="a11y_change_percentage">Percentage price change: <xliff:g id="change_percentage">%1$s</xliff:g></string>
+    <string name="a11y_change_absolute">Absolute price change: <xliff:g id="change_absolute">%1$s</xliff:g></string>
 
 </resources>

@@ -1,3 +1,14 @@
 <resources>
     <dimen name="activity_horizontal_margin">16dp</dimen>
+
+    <dimen name="widget_collection_default_height">180dp</dimen>
+    <dimen name="widget_collection_min_resize_height">@dimen/widget_collection_default_height</dimen>
+    <dimen name="widget_collection_default_width">220dp</dimen>
+    <dimen name="widget_collection_min_resize_width">220dp</dimen>
+
+    <dimen name="layout_zero">0dp</dimen>
+
+    <dimen name="list_item_main_padding">16dp</dimen>
+    <dimen name="list_item_price_margin_end">10sp</dimen>
+    <dimen name="list_item_change_padding">3dp</dimen>
 </resources>

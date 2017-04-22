@@ -15,12 +15,20 @@
         android:theme="@style/AppTheme"
         android:supportsRtl="true"
         tools:ignore="GoogleAppIndexingWarning">
+
         <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".ui.ChartActivity"
+            android:parentActivityName=".ui.MainActivity"
+            android:label="@string/chart_title" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.MainActivity" />
         </activity>
 
         <service
@@ -37,6 +45,23 @@
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <receiver
+            android:name=".widget.CollectionWidgetProvider"
+            android:label="@string/title_widget_collection" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.udacity.stockhawk.ACTION_DATA_UPDATED" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/collection_appwidget_info" />
+        </receiver>
+
+        <service android:name=".widget.CollectionWidgetRemoteViewsService"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
     </application>
 
 </manifest>
