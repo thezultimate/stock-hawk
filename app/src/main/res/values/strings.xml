@@ -41,6 +41,8 @@
     <string name="title_widget_collection">Stock Hawk Widget</string>
 
     <string name="empty_stock_list">No Stock Information Available</string>
+    
+    <string name="add_stock">Add stock</string>
 
     <string name="price_change_to_percentage">Switch to percentage price change</string>
     <string name="price_change_to_absolute">Switch to absolute price change</string>
